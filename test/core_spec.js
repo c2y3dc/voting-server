@@ -125,5 +125,15 @@ describe('application logic', () => {
 				})
 			}))
 		})
+
+		it('prevents invalid votes', () => {
+			const state = Map({
+				pair: List.of('Trainspotting', '28 Days Later'),
+			})
+			const nextState = vote(state, 'Dawn of the Dead')
+			expect(nextState).to.equal(Map({
+				pair: List.of('Trainspotting', '28 Days Later')
+			}))
+		})
 	})
 })
