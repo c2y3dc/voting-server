@@ -22,7 +22,7 @@ export function next(state){
 function removePreviousVote(voteState, voter){
 	const previousVote = voteState.getIn(['votes', voter])
 	if(previousVote){
-		return voteState.updateIn(['tally', previousVote], t => t + 1).remove(['votes', voter])
+		return voteState.updateIn(['tally', previousVote], t => t - 1).remove(['votes', voter])
 	} else {
 		return voteState
 	}

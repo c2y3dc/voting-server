@@ -62,8 +62,8 @@ describe('reducer', () => {
 			{type: 'SET_ENTRIES', entries: ['Trainspotting', '28 Days Later']},
 			{type: 'NEXT'},
 			{type: 'VOTE', entry: 'Trainspotting', clientId: 'voter1'},
-			{type: 'VOTE', entry: '28 Days Later', clientId: 'voter1'},
-			{type: 'VOTE', entry: 'Trainspotting', clientId: 'voter1'},
+			{type: 'VOTE', entry: '28 Days Later', clientId: 'voter2'},
+			{type: 'VOTE', entry: 'Trainspotting', clientId: 'voter3'},
 			{type: 'NEXT'}
 		]
 		const finalState = actions.reduce(reducer, Map())
