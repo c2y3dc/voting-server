@@ -19,16 +19,28 @@ export function next(state){
 	}
 }
 
-export function vote(voteState, entry){
-	const pair = voteState.get('pair')
-	if(pair.includes(entry)){
-		return voteState.updateIn(
-			['tally', entry],
-			0,
-			tally => tally + 1
-		)		
+function removePreviousVote(voteState, voter){
+	const previousVote = voteState.getIn(['votes', voter])
+	if(previousVote){
+		return voteState.updateIn(['tally', previousVote], t => t + 1).remove(['votes', voter])
+	} else {
+		return voteState
+	}
+}
+
+function addVote(voteState, entry, voter){
+	if(voteState.get('pair').includes(entry)){
+		return voteState.updateIn(['tally', entry], 0, t => t + 1).setIn(['votes', voter], entry)
 	}
 	return voteState
+}
+
+export function vote(voteState, entry, voter){
+	return addVote(
+		removePreviousVote(voteState, voter),
+		entry,
+		voter
+	)
 }
 
 function getWinners(vote){
